@@ -7,4 +7,3 @@ public class Main {
 	}
 
 }
-//trabajo realizado por Laura Jose y Sole Daniel
