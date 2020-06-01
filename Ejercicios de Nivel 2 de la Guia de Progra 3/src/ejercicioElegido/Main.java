@@ -36,7 +36,7 @@ public class Main {
 		}
 		
 		
-		for(int j=pos+1;j<entrada.length();j++) {
+		for(int j=pos+1;j<entrada.length()-1;j++) {
 			if(entrada.charAt(j)!=' ') {
 			jugada2 += entrada.charAt(j);
 			}
@@ -45,25 +45,52 @@ public class Main {
 		jugador1.definirJugada(jugada1);
 		jugador2.definirJugada(jugada2);
 		
-		/*
-		//System.out.println(jugada2+jugada2.length());//longitud de la cadena
-		for(int i=0;i<jugada2.length();i++) {
-			System.out.println("'"+jugada2.charAt(i)+"'");
-			
-		}
-		*/
-		
-		
-		
-		
 		
 		if(jugador1.dimeJugada().equals("Tijera")) {
 			
 			if(jugador2.dimeJugada().equals("Papel")) {
+				
 				ganador += jugador1.dimeNombre();
-			} 
+			}
+			if(jugador2.dimeJugada().equals("Piedra")) {
+				
+				ganador += jugador2.dimeNombre();
+			}
 	
 		}
+		
+		if(jugador1.dimeJugada().equals("Papel")) {
+			
+			if(jugador2.dimeJugada().equals("Piedra")) {
+				
+				ganador += jugador1.dimeNombre();
+			}
+			if(jugador2.dimeJugada().equals("Tijera")) {
+				
+				ganador += jugador2.dimeNombre();
+			}
+			
+		}
+		if(jugador1.dimeJugada().equals("Piedra")) {
+			
+			if(jugador2.dimeJugada().equals("Tijera")) {
+				
+				ganador += jugador1.dimeNombre();
+			}
+			if(jugador2.dimeJugada().equals("Papel")) {
+				
+				ganador += jugador2.dimeNombre();
+			}
+			
+		}
+		
+		if(jugador1.dimeJugada().equals(jugador2.dimeJugada())) {
+			ganador +="Empate";
+		}
+		
+		
+		
+	
 	
 		System.out.println(ganador);
 		
