@@ -90,15 +90,8 @@ public class Main {
 		
 		
 		
-	
-	
-		System.out.println(ganador);
-		
-	
-		
-
-		//archivoSalida.escribeArchivo(ganador);
-		//System.out.println(archivoSalida.leeArchivo());
+		archivoSalida.escribeArchivo(ganador);
+		System.out.println(archivoSalida.leeArchivo());
 	}
 
 }
