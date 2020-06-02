@@ -14,6 +14,12 @@ import javax.swing.JOptionPane;
 public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements ActionListener {
 	VentanaConBotonesParaArchivoEntradaSalida() {
 		super("SoftwareMaster");
+		if (archivoEntrada != null) {
+			archivoEntrada.eliminaArchivo("entrada.txt");
+		}
+		if (archivoSalida != null) {
+			archivoSalida.eliminaArchivo("salida.txt");
+		}
 		nombreJugador1 = JOptionPane.showInputDialog("Ingrese el nombre del jugador 1");
 		nombreJugador2 = JOptionPane.showInputDialog("Ingrese el nombre del jugador 2");
 		nombreJugador1 = nombreJugador1.toLowerCase();
@@ -36,31 +42,23 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 		label2 = new JLabel("JUGADOR 2: " + jugador2.dimeNombre());
 		label2.setBounds(10, 30, 1500, 40);
 
-		botonAzul = new JButton("Cargar Linea en Archivo");
+		botonAzul = new JButton("ELEGIR JUGADA");
 		botonAzul.setBounds(50, 70, 180, 40);
 		botonAzul.setBackground(Color.blue);
 
-		botonAmarillo = new JButton("Mostrar archivo Entrada");
+		botonAmarillo = new JButton("MOSTRAR JUGADA");
 		botonAmarillo.setBounds(50, 130, 180, 40);
 		botonAmarillo.setBackground(Color.yellow);
 
-		botonVerde = new JButton("Iniciar Proceso");
+		botonVerde = new JButton("INICIAR JUEGO");
 		botonVerde.setBounds(50, 200, 180, 40);
 		botonVerde.setBackground(Color.green);
 
-		botonNaranja = new JButton("Mostrar archivo Salida");
+		botonNaranja = new JButton("MOSTRAR GANADOR");
 		botonNaranja.setBounds(50, 270, 180, 40);
 		botonNaranja.setBackground(Color.orange);
 
-		botonVioleta = new JButton("Eliminar Archivo Entrada");
-		botonVioleta.setBounds(400, 70, 180, 40);
-		botonVioleta.setBackground(Color.magenta);
-
-		botonTurqueza = new JButton("Eliminar Archivo Salida");
-		botonTurqueza.setBounds(400, 130, 180, 40);
-		botonTurqueza.setBackground(Color.cyan);
-
-		botonRojo = new JButton("Finalizar");
+		botonRojo = new JButton("FIN DEL JUEGO");
 		botonRojo.setBounds(50, 340, 180, 40);
 		botonRojo.setBackground(Color.red);
 
@@ -70,22 +68,29 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 		add(botonVerde);
 		add(botonAmarillo);
 		add(botonNaranja);
-		add(botonVioleta);
-		add(botonTurqueza);
 		add(botonRojo);
 
 		botonAzul.addActionListener(this);
 		botonVerde.addActionListener(this);
 		botonAmarillo.addActionListener(this);
 		botonNaranja.addActionListener(this);
-		botonVioleta.addActionListener(this);
-		botonTurqueza.addActionListener(this);
 		botonRojo.addActionListener(this);
-
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == botonAzul) {
+			if (archivoEntrada != null) {
+				archivoEntrada.eliminaArchivo("entrada.txt");
+			}
+			if (archivoSalida != null) {
+				archivoSalida.eliminaArchivo("salida.txt");
+			}
+			ganador = "";
+			jugada1 = "";
+			jugada2 = "";
+			jugador1.definirJugada(jugada1);
+			jugador2.definirJugada(jugada2);
+			entrada = "";
 			jugadaJugador1 = JOptionPane
 					.showInputDialog("Ingrese La jugada del JUJADOR 1:\n1: Piedra\n2: Papel\n3: Tijera");
 
@@ -112,13 +117,13 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 		}
 		if (e.getSource() == botonAmarillo) {
 			if (archivoEntrada.leeArchivo().equals("") == false) {
-				System.out.println("Archivo Entrada:\n\n" + archivoEntrada.leeArchivo() + "\n\n\n\n\n\n\n\n");
+				JOptionPane.showMessageDialog(null, "JUGADA REALIZADA: " + archivoEntrada.leeArchivo());
 			}
 		}
 		if (e.getSource() == botonVerde) {
+
 			entrada += archivoEntrada.leeArchivo();
 			pos = 0;
-			System.out.println("NOMBRE: " + jugador1.dimeNombre());
 			while (entrada.charAt(pos) != ' ') {
 				jugada1 += entrada.charAt(pos);
 				pos++;
@@ -142,9 +147,7 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 
 					ganador += jugador2.dimeNombre();
 				}
-
 			}
-
 			if (jugador1.dimeJugada().equals("Papel")) {
 
 				if (jugador2.dimeJugada().equals("Piedra")) {
@@ -174,25 +177,16 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 				ganador += "Empate";
 			}
 			archivoSalida.escribeArchivo(ganador);
-			// System.out.println(archivoSalida.leeArchivo());
-			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-			JOptionPane.showMessageDialog(null, "El Archivo de Salida ha sido correctamente actualizado");
 
+			JOptionPane.showMessageDialog(null,
+					"LA JUGADA HA SIDO REALIZADA.. PRESIONE BOTON MOSTRAR GANADOR PARA VER EL RESULTADO");
 		}
 		if (e.getSource() == botonNaranja) {
-			salida = archivoSalida.leeArchivo();
+			salida = "";
+			salida += archivoSalida.leeArchivo();
 			if (salida.contentEquals("") == false) {
-
-				System.out.println("Archivo Salida:\n\nGanador: " + salida + "\n\n\n\n\n\n\n");
+				JOptionPane.showMessageDialog(null, "EL GANADOR ES: " + salida);
 			}
-		}
-		if (e.getSource() == botonVioleta) {
-			archivoEntrada.eliminaArchivo("entrada.txt");
-			JOptionPane.showMessageDialog(null, "El archivo de ENTRADA se ha eliminado exitosamente");
-		}
-		if (e.getSource() == botonTurqueza) {
-			archivoSalida.eliminaArchivo("salida.txt");
-			JOptionPane.showMessageDialog(null, "El archivo de SALIDA se ha eliminado exitosamente");
 		}
 		if (e.getSource() == botonRojo) {
 			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -209,8 +203,6 @@ public class VentanaConBotonesParaArchivoEntradaSalida extends JFrame implements
 	private JButton botonAmarillo;
 	private JButton botonVerde;
 	private JButton botonNaranja;
-	private JButton botonVioleta;
-	private JButton botonTurqueza;
 	private JButton botonRojo;
 
 	private String nombreJugador1;
