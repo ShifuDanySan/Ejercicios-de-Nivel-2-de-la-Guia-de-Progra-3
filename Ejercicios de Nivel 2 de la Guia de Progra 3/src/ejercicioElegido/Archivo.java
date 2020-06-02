@@ -41,5 +41,10 @@ public class Archivo {
 		return texto;
 	}
 
+	public void eliminaArchivo(String direccion) {
+		File archivo = new File(direccion);
+		archivo.delete();
+	}
+
 	String direccion;
 }
