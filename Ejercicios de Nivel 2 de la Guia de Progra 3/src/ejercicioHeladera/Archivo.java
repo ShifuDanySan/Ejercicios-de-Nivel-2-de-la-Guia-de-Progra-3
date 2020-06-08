@@ -1,9 +1,10 @@
 package ejercicioHeladera;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Archivo{
+public class Archivo {
 	public Archivo(String direccion) {
 		this.direccion = direccion;
 	}
@@ -13,90 +14,85 @@ public class Archivo{
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(this.direccion));
 			String temp = "";
-			int i=0;
+			int i = 0;
 			String bfRead;
-			if((bfRead = bf.readLine()) != null) {
-				for(i=0;i<bfRead.length();i++) {
-					if(i==0) {
-						cantidadDeIngredientesEnHeladera=Character.getNumericValue(bfRead.charAt(i));
+			if ((bfRead = bf.readLine()) != null) {
+				for (i = 0; i < bfRead.length(); i++) {
+					if (i == 0) {
+						cantidadDeIngredientesEnHeladera = Character.getNumericValue(bfRead.charAt(i));
 					}
-					if(i==2) {
-						cantidadPaginas=Character.getNumericValue(bfRead.charAt(i));
+					if (i == 2) {
+						cantidadPaginas = Character.getNumericValue(bfRead.charAt(i));
 					}
 				}
 			}
-			String ingredientesEnHeladera[]= new String [cantidadDeIngredientesEnHeladera];
-			String aux="";
-			if((bfRead = bf.readLine()) != null) {
-				i= 0;
-					for(int j=0;j<bfRead.length();j++) {
-						if(bfRead.charAt(j)!=' ') {
-							aux+=bfRead.charAt(j);
-						}else {
-							ingredientesEnHeladera[i]=aux;
-							i++;
-							aux="";
-						}
-						if(j==bfRead.length()-1) {
-							ingredientesEnHeladera[i]=aux;
-						}
+			String ingredientesEnHeladera[] = new String[cantidadDeIngredientesEnHeladera];
+			String aux = "";
+			if ((bfRead = bf.readLine()) != null) {
+				i = 0;
+				for (int j = 0; j < bfRead.length(); j++) {
+					if (bfRead.charAt(j) != ' ') {
+						aux += bfRead.charAt(j);
+					} else {
+						ingredientesEnHeladera[i] = aux;
+						i++;
+						aux = "";
 					}
-				
-			}
-			
-			libro= new Pagina[cantidadPaginas];
-			String aux2="";
-			for(int k=0;k<cantidadPaginas;k++) {
-				
-				bfRead="";
-				if((bfRead = bf.readLine()) != null) {
-					System.out.println(k);
-					cantidadIngredientesEnPagina=Character.getNumericValue(bfRead.charAt(k));
-					//System.out.println(cantidadIngredientesEnPagina);
-					
+					if (j == bfRead.length() - 1) {
+						ingredientesEnHeladera[i] = aux;
+					}
 				}
-				bfRead="";
-				Pagina pagina=new Pagina(cantidadIngredientesEnPagina);
-				
-				if((bfRead = bf.readLine()) != null) {
-					aux2="";
-					i= 0;
-					for(int j=0;j<bfRead.length();j++) {
-						if(bfRead.charAt(j)!=' ') {
-							aux2+=bfRead.charAt(j);
-						}else {
+
+			}
+
+			libro = new Pagina[cantidadPaginas];
+			String aux2 = "";
+			for (int k = 0; k < cantidadPaginas; k++) {
+
+				bfRead = "";
+				if ((bfRead = bf.readLine()) != null) {
+					cantidadIngredientesEnPagina = Integer.parseInt(bfRead);
+				}
+				bfRead = "";
+				Pagina pagina = new Pagina(cantidadIngredientesEnPagina);
+
+				if ((bfRead = bf.readLine()) != null) {
+					aux2 = "";
+					i = 0;
+					for (int j = 0; j < bfRead.length(); j++) {
+						if (bfRead.charAt(j) != ' ') {
+							aux2 += bfRead.charAt(j);
+						} else {
 							pagina.cargarIngredienteAPagina(aux2, i);
-							//System.out.println(pagina.dimeIngredienteDePagina(i));
 							i++;
-							aux2="";
+							aux2 = "";
 						}
-						if(j==bfRead.length()-1) {
-							
+						if (j == bfRead.length() - 1) {
+
 							pagina.cargarIngredienteAPagina(aux2, i);
 						}
 					}
 				}
-				libro[k]=pagina;
-				cantidadIngredientesEnPagina=0;
+				libro[k] = pagina;
+				cantidadIngredientesEnPagina = 0;
+
 			}
-			
-			
-			
-			
+
 			bf.close();// cierro el archivo
 		} catch (IOException e) {// controlo excepciones
 			System.out.println("No se encuentra el archivo");
 		}
-		
-		
+
 	}
+
 	public Pagina contenidoLibro()[] {
 		return libro;
 	}
-	private int cantidadDeIngredientesEnHeladera=0;
-	private int cantidadPaginas=0;
+
+	private int cantidadDeIngredientesEnHeladera = 0;
+	private int cantidadPaginas = 0;
 	private String ingredientesEnHeladera[];
-	private int cantidadIngredientesEnPagina=0;
+	private int cantidadIngredientesEnPagina = 0;
 	private Pagina libro[];
 	private String direccion;
 }
