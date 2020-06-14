@@ -26,7 +26,7 @@ public class Archivo {
 					}
 				}
 			}
-			String ingredientesEnHeladera[] = new String[cantidadDeIngredientesEnHeladera];
+			this.ingredientesEnHeladera = new String[cantidadDeIngredientesEnHeladera];
 			String aux = "";
 			if ((bfRead = bf.readLine()) != null) {
 				i = 0;
@@ -85,9 +85,24 @@ public class Archivo {
 
 	}
 
-	public Pagina contenidoLibro()[] {
+	public Pagina[] contenidoLibro(){
 		return libro;
 	}
+	
+	public String[] dameIngredientesHeladera() {
+		return ingredientesEnHeladera;
+	}
+	
+	public int dimeCantIngredientesHeladera() {
+		return cantidadDeIngredientesEnHeladera;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	private int cantidadDeIngredientesEnHeladera = 0;
 	private int cantidadPaginas = 0;

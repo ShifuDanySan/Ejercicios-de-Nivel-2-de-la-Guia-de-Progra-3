@@ -1,19 +1,20 @@
 package ejercicioHeladera;
 
 public class Pagina {
+	
 	public Pagina(int cantidadIngredientes) {
 		this.cantidadIngredientes = cantidadIngredientes;
 		String pagina[] = new String[this.cantidadIngredientes];
-		this.pagina = pagina;
+		this.ingredientes = pagina;
 	}
 
 	public void cargarIngredienteAPagina(String ingrediente, int posicion) {
-		this.pagina[posicion] = ingrediente;
+		this.ingredientes[posicion] = ingrediente;
 
 	}
 
 	public String dimeIngredienteDePagina(int posicion) {
-		return this.pagina[posicion];
+		return this.ingredientes[posicion];
 	}
 
 	public int largoDeVectorPagina() {
@@ -22,5 +23,5 @@ public class Pagina {
 	}
 
 	private int cantidadIngredientes = 0;
-	private String pagina[];
+	private String ingredientes[];
 }
